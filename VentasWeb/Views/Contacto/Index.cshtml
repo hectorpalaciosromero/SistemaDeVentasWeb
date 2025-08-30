@@ -1,0 +1,538 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Hector Palacios</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- GSAP Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --light: #f8fafc;
+            --dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e6e9ef);
+            color: #334155;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .contact-info:hover .contact-icon {
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            padding: 14px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .profile-img {
+            border-radius: 20px;
+            border: 5px solid white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @@keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-1 { animation-delay: 0s; }
+        .floating-2 { animation-delay: 1s; }
+        .floating-3 { animation-delay: 2s; }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(139, 92, 246, 0.05));
+            z-index: -1;
+            filter: blur(2px);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .wave-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 1;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".1" fill="%232563eb"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".1" fill="%2306b6d4"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.3;
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(37, 99, 235, 0.15);
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+    <!-- Botón para regresar al inicio -->
+    <a href="/" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        <span>Inicio</span>
+    </a>
+
+    <!-- Wave background -->
+    <div class="wave-bg"></div>
+
+    <!-- Floating bubbles -->
+    <div class="bubble w-64 h-64 top-20 -left-20 floating-1"></div>
+    <div class="bubble w-40 h-40 top-1/3 right-10 floating-2"></div>
+    <div class="bubble w-80 h-80 bottom-10 left-1/4 floating-3"></div>
+
+    <main class="container mx-auto px-4 sm:px-6 py-16 content">
+        <header class="text-center mb-12 md:mb-16" data-aos="fade-down">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                Contacta a <span class="gradient-text">Hector Palacios</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Desarrollador de Software experto en tecnologías emergentes y arquitecturas escalables
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Profile Section -->
+            <div class="lg:col-span-1">
+                <div class="card p-6 h-full" data-aos="fade-right">
+                    <div class="flex justify-center mb-5">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-48 h-48 flex items-center justify-center">
+                            <i class="fas fa-user text-6xl text-gray-400"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-bold text-center mb-2">Hector Palacios</h2>
+                    <p class="text-lg text-blue-600 font-semibold text-center mb-4">Desarrollador de Software</p>
+
+                    <p class="text-gray-600 text-center mb-6">
+                        Experto en desarrollo de software y arquitecturas escalables con enfoque en tecnologías emergentes.
+                        Más de 5 años creando soluciones innovadoras para empresas líderes.
+                    </p>
+
+                    <div class="border-t border-gray-200 pt-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Habilidades Técnicas</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>JavaScript/TypeScript</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>React & Next.js</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Node.js & Express</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Arquitectura Cloud</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mt-4 space-x-4">
+                        <a href="https://pe.linkedin.com/" class="contact-icon" aria-label="LinkedIn Hector">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/" class="contact-icon" aria-label="GitHub Hector">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/" class="contact-icon" aria-label="Twitter Hector">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:hector.palacios@ejemplo.com" class="contact-icon" aria-label="Email Hector">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Section -->
+            <div class="lg:col-span-2">
+                <div class="card p-8 h-full" data-aos="fade-left" data-aos-delay="200">
+                    <h2 class="text-2xl font-bold mb-6 section-title">Envíame un mensaje</h2>
+
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Tu nombre</label>
+                                <input type="text" id="name" class="form-control w-full" placeholder="Ingresa tu nombre completo">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Tu email</label>
+                                <input type="email" id="email" class="form-control w-full" placeholder="tu@email.com">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-2">Asunto</label>
+                            <input type="text" id="subject" class="form-control w-full" placeholder="¿Sobre qué quieres hablar?">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2">Tu mensaje</label>
+                            <textarea id="message" rows="6" class="form-control w-full" placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button type="submit" class="btn-primary px-8 py-3 text-lg">
+                                <i class="fas fa-paper-plane mr-2"></i> Enviar mensaje
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <h3 class="text-xl font-semibold mb-4">Información de contacto directa</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="contact-info flex flex-col items-center text-center">
+                                <div class="contact-icon mb-3">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <h4 class="font-semibold mb-1">Teléfono</h4>
+                                <p class="text-gray-600">+51 912 207 351</p>
+                                <p class="text-sm text-gray-500 mt-1">Lun-Vie, 9am-6pm</p>
+                            </div>
+
+                            <div class="contact-info flex flex-col items-center text-center">
+                                <div class="contact-icon mb-3">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h4 class="font-semibold mb-1">Email</h4>
+                                <p class="text-gray-600">hectorpalacios@gmail.com</p>
+                                <p class="text-sm text-gray-500 mt-1">Respuesta en 24h</p>
+                            </div>
+
+                            <div class="contact-info flex flex-col items-center text-center">
+                                <div class="contact-icon mb-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h4 class="font-semibold mb-1">Ubicación</h4>
+                                <p class="text-gray-600">Lima, Perú</p>
+                                <p class="text-sm text-gray-500 mt-1">Disponible para reuniones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="mb-16" data-aos="fade-up">
+            <h2 class="text-2xl font-bold mb-6 text-center section-title">Mi ubicación</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249744.0324099691!2d-77.12786300000002!3d-12.026253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c5f619ee3ec7%3A0x14206cb9cc452e4a!2sLima!5e0!3m2!1ses-419!2spe!4v1688400000000!5m2!1ses-419!2spe"
+                        width="100%"
+                        height="400"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Availability Section -->
+        <div class="card p-8 mb-16" data-aos="fade-up">
+            <h2 class="text-2xl font-bold mb-6 text-center section-title">Disponibilidad</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Horarios de disponibilidad</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between border-b pb-2">
+                            <span>Lunes - Viernes</span>
+                            <span class="font-medium">9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span>Sábados</span>
+                            <span class="font-medium">10:00 AM - 2:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Domingos</span>
+                            <span class="font-medium">Descanso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Tipos de consultas</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                            <span>Desarrollo de proyectos personalizados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                            <span>Consultoría técnica y arquitectura de software</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                            <span>Mentoría y capacitación en desarrollo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                            <span>Optimización de sistemas existentes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                            <span>Charlas y conferencias técnicas</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p class="text-gray-600 mb-4">© 2023 Hector Fernando Palacios Romero. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-500 hover:text-purple-600 transition"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-500 hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-500 hover:text-red-600 transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            easing: 'ease-in-out',
+            duration: 800,
+        });
+
+        // Floating bubble animation with GSAP
+        gsap.to('.floating-1', {
+            y: -20,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        });
+
+        gsap.to('.floating-2', {
+            y: -15,
+            duration: 2.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: 0.5
+        });
+
+        gsap.to('.floating-3', {
+            y: -25,
+            duration: 3.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: 1
+        });
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Show success message
+            const form = this;
+            const originalButton = form.querySelector('button[type="submit"]');
+            const buttonText = originalButton.innerHTML;
+
+            originalButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            originalButton.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                originalButton.innerHTML = '<i class="fas fa-check"></i> Mensaje enviado!';
+                originalButton.classList.add('bg-green-500');
+
+                // Reset form
+                form.reset();
+
+                // Reset button after delay
+                setTimeout(() => {
+                    originalButton.innerHTML = buttonText;
+                    originalButton.classList.remove('bg-green-500');
+                    originalButton.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login hector</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #0d47a1; /* fallback */
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            top: 0;
+            left: 0;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8.5px);
+            -webkit-backdrop-filter: blur(8.5px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .logo img {
+            height: 80px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        label {
+            font-weight: 600;
+            color: #0d47a1;
+        }
+
+        .btn-primary {
+            background: #0d47a1;
+            border: none;
+            font-weight: 600;
+            padding: 0.75rem;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
+        }
+
+            .btn-primary:hover {
+                background: #094080;
+                box-shadow: 0 6px 20px rgba(9, 64, 128, 0.6);
+            }
+
+        .text-footer {
+            color: white;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+            .text-footer a {
+                color: #bbdefb;
+                text-decoration: none;
+                font-weight: 700;
+            }
+
+                .text-footer a:hover {
+                    text-decoration: underline;
+                }
+
+        input.form-control {
+            border-radius: 0.5rem;
+            border: 1.5px solid #0d47a1;
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+            input.form-control:focus {
+                border-color: #094080;
+                box-shadow: 0 0 8px #0d47a1aa;
+                outline: none;
+            }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="login-container">
+        <div class="card animate__animated animate__fadeInDown">
+            <div class="card-body text-center">
+                <div class="logo">
+                    <img src="@Url.Content("~/Imagenes/logo.png")" alt="Logo Tienda" />
+                </div>
+                <h3 class="mb-4 text-primary fw-bold">Bienvenido a He</h3>
+                <form action="@Url.Content("~/Login/Index")" method="post" autocomplete="off" novalidate>
+                    <div class="mb-3 text-start">
+                        <label for="emailaddress" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="emailaddress" name="correo" placeholder="tuemail@ejemplo.com" required value="admin@gmail.com" />
+                        <div class="invalid-feedback">
+                            Por favor ingresa un correo válido.
+                        </div>
+                    </div>
+                    <div class="mb-4 text-start">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="clave" placeholder="••••••••" required value="admin@gmail.com" />
+                        <div class="invalid-feedback">
+                            La contraseña es requerida.
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Ingresar</button>
+                </form>
+                <p class="text-footer mt-3 mb-0">
+                    Todos los derechos reservados palacios 2025 &copy;
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+    /* Inicialización de particles.js */
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": { "enable": true, "value_area": 800 }
+            },
+            "color": { "value": "#ffffff" },
+            "shape": {
+                "type": "circle",
+                "stroke": { "width": 0, "color": "#000000" },
+                "polygon": { "nb_sides": 5 }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": { "enable": false }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": { "enable": false }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 4,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": { "enable": false }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": { "enable": true, "mode": "grab" },
+                "onclick": { "enable": true, "mode": "push" },
+                "resize": true
+            },
+            "modes": {
+                "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
+                "repulse": { "distance": 200 },
+                "push": { "particles_nb": 4 },
+                "remove": { "particles_nb": 2 }
+            }
+        },
+        "retina_detect": true
+    });
+
+    // Validación simple de formulario Bootstrap 5
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('form');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+    </script>
+
+</body>
+</html>

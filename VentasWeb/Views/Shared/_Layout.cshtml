@@ -1,0 +1,478 @@
+﻿@using VentasWeb.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Last-Modified" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Mi Tienda Online HE</title>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@8..72,400;8..72,600&display=swap" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/PluginsCSS")
+    @RenderSection("estilos", required: false)
+
+<style>
+        /* Variables para temas */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --background-color: #f9fafb;
+            --text-color: #1f2937;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition-speed: 0.35s;
+        }
+
+        /* Reset y base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color var(--transition-speed) ease-in-out;
+        }
+        a:hover, a:focus {
+            color: var(--primary-hover);
+            outline: none;
+        }
+
+        /* Navbar moderno */
+        nav.navbar {
+            background: #fff;
+            box-shadow: 0 4px 16px var(--shadow-light);
+            padding: 0.75rem 2rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: sticky;
+            top: 1rem;
+            margin: 0 1rem 2rem;
+            z-index: 1030;
+        }
+
+        nav.navbar .navbar-brand img {
+            height: 52px;
+            width: auto;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+            transition: transform var(--transition-speed);
+        }
+        nav.navbar .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        nav.navbar .nav-link {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+        nav.navbar .nav-link:hover, nav.navbar .nav-link.active {
+            background-color: var(--primary-color);
+            color: #fff !important;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Botón toggler */
+        nav.navbar .navbar-toggler {
+            border: none;
+            outline: none;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+        nav.navbar .navbar-toggler:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+        nav.navbar .navbar-toggler:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Dropdown */
+        .dropdown-menu {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: 0 8px 24px var(--shadow-light);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            will-change: transform, opacity;
+        }
+
+        /* Contenedor principal */
+        main.container {
+            max-width: 1080px;
+            padding: 1.5rem 1rem;
+            background: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 30px var(--shadow-light);
+            margin-bottom: 3rem;
+            min-height: 70vh;
+            transition: box-shadow 0.3s ease;
+        }
+        main.container:hover {
+            box-shadow: 0 12px 40px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Footer */
+.footer {
+    background-color: #fff;
+    color: var(--text-color);
+    box-shadow: 0 -4px 16px var(--shadow-light);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    user-select: none;
+    /* Eliminado position fixed para que no quede pegado a la ventana */
+    width: 100%;
+    z-index: 1100;
+    transition: background-color 0.3s ease;
+    /* Opcional: añade un padding para que tenga algo de espacio interno */
+    padding: 1.75rem 2rem 1.75rem 2rem;
+    box-sizing: border-box;
+}
+
+.footer-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    /* Eliminado padding aquí para que esté en .footer */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+    min-width: 220px;
+}
+
+.footer-section h3, .footer-section h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    letter-spacing: 0.08em;
+}
+
+.footer-section p, .footer-section li, .footer-section a {
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.footer-section p {
+    margin: 0.3rem 0;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    transition: color var(--transition-speed) ease-in-out;
+}
+.footer-section ul li a:hover,
+.footer-section ul li a:focus {
+    color: var(--primary-hover);
+    outline: none;
+}
+
+.social-icons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: background-color var(--transition-speed) ease-in-out, transform var(--transition-speed);
+}
+.social-icons a:hover,
+.social-icons a:focus {
+    background-color: var(--primary-hover);
+    transform: scale(1.15);
+    outline: none;
+}
+
+.footer-section .fas {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    min-width: 18px;
+    text-align: center;
+}
+
+.footer-bottom {
+    background-color: var(--background-color);
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        padding: 0;
+    }
+    .footer-section {
+        min-width: auto;
+    }
+}
+
+@@media (max-width: 480px) {
+    .footer-container {
+        padding: 0;
+    }
+    .social-icons a {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+}
+
+/* Para evitar que el contenido quede pegado al footer */
+.main-content {
+    padding-bottom: 120px; 
+}
+
+
+        /* Línea horizontal */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Scrollbar WebKit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 20px;
+            border: 2px solid var(--background-color);
+        }
+
+        /* Responsive */
+        @@media (max-width: 991.98px) {
+            nav.navbar {
+                margin: 0 1rem 1rem;
+            }
+            main.container {
+                margin: 1rem;
+                padding: 1.25rem 1rem;
+            }
+        }
+</style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-0 px-lg-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="@Url.Action("Index", "Home")" aria-label="Mi Tienda Online">
+                <img src="@Url.Content("~/Imagenes/logo.png")" alt="Logo Mi Tienda" />
+                <span class="fs-4 fw-semibold text-primary" style="letter-spacing: 0.1em;">MI TIENDA HE</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" name="Home" href="@Url.Action("Index", "Home")"><i class="fas fa-home me-2"></i>Inicio</a>
+                    </li>
+                    @Html.ActionLinkAllow()
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Contacto")"><i class="fas fa-hands-helping me-2"></i>Contacto</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a href="@Url.Action("Salir", "Home")" class="nav-link d-flex align-items-center gap-2 btn btn-outline-primary px-3 py-2 rounded-pill shadow-sm">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <strong>Salir</strong>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        @RenderBody()
+        <hr />
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section about">
+                    <h3>Mi Tienda Online HE</h3>
+                    <p>Tu mejor opción en productos de calidad y servicio excepcional. Estamos aquí para ayudarte a crecer.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section links">
+                    <h4>Enlaces útiles</h4>
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Productos</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Contacto</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Ayuda</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section contact">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Avenida Pezet,Lima, Perú </p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> soporte@HE.com</p>
+                    <p><i class="fas fa-clock"></i> Lunes - Viernes: 9:00 - 18:00</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; @DateTime.Now.Year Mi Tienda Online. Todos los derechos reservados palacios.</p>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/PluginsJS")
+
+    <script type="text/javascript">
+
+        $.extend({ MisUrls: { url: {}, urls: function (a) { $.extend($.MisUrls.url, a); } } });
+
+        //CONTROLADOR ROL
+        $.MisUrls.urls({ _ObtenerRoles: '@Url.Action("Obtener", "Rol")' });
+        $.MisUrls.urls({ _GuardarRol: '@Url.Action("Guardar", "Rol")' });
+        $.MisUrls.urls({ _EliminarRol: '@Url.Action("Eliminar", "Rol")' });
+
+        //CONTROLADOR PERMISOS
+        $.MisUrls.urls({ _ObtenerPermisos: '@Url.Action("Obtener", "Permisos")' });
+        $.MisUrls.urls({ _GuardarPermisos: '@Url.Action("Guardar", "Permisos")' });
+
+        //CONTROLADOR USUARIO
+        $.MisUrls.urls({ _ObtenerUsuarios: '@Url.Action("Obtener", "Usuario")' });
+        $.MisUrls.urls({ _GuardarUsuario: '@Url.Action("Guardar", "Usuario")' });
+        $.MisUrls.urls({ _EliminarUsuario: '@Url.Action("Eliminar", "Usuario")' });
+
+        //CONTROLADOR PROVEEDOR
+        $.MisUrls.urls({ _ObtenerProveedores: '@Url.Action("Obtener", "Proveedor")' });
+        $.MisUrls.urls({ _GuardarProveedor: '@Url.Action("Guardar", "Proveedor")' });
+        $.MisUrls.urls({ _EliminarProveedor: '@Url.Action("Eliminar", "Proveedor")' });
+
+        //CONTROLADOR CATEGORIA
+        $.MisUrls.urls({ _ObtenerCategorias: '@Url.Action("Obtener", "Categoria")' });
+        $.MisUrls.urls({ _GuardarCategoria: '@Url.Action("Guardar", "Categoria")' });
+        $.MisUrls.urls({ _EliminarCategoria: '@Url.Action("Eliminar", "Categoria")' });
+
+        //CONTROLADOR PRODUCTO
+        $.MisUrls.urls({ _ObtenerProductos: '@Url.Action("Obtener", "Producto")' });
+        $.MisUrls.urls({ _ObtenerProductosPorTienda: '@Url.Action("ObtenerPorTienda", "Producto")' });
+        $.MisUrls.urls({ _GuardarProducto: '@Url.Action("Guardar", "Producto")' });
+        $.MisUrls.urls({ _EliminarProducto: '@Url.Action("Eliminar", "Producto")' });
+        $.MisUrls.urls({ _ObtenerAsignaciones: '@Url.Action("ObtenerAsignaciones", "Producto")' });
+        $.MisUrls.urls({ _RegistrarProductoTienda: '@Url.Action("RegistrarProductoTienda", "Producto")' });
+        $.MisUrls.urls({ _ModificarProductoTienda: '@Url.Action("ModificarProductoTienda", "Producto")' });
+        $.MisUrls.urls({ _EliminarProductoTienda: '@Url.Action("EliminarProductoTienda", "Producto")' });
+
+        //CONTROLADOR TIENDA
+        $.MisUrls.urls({ _ObtenerTiendas: '@Url.Action("Obtener", "Tienda")' });
+        $.MisUrls.urls({ _GuardarTienda: '@Url.Action("Guardar", "Tienda")' });
+        $.MisUrls.urls({ _EliminarTienda: '@Url.Action("Eliminar", "Tienda")' });
+
+        //CONTROLADOR COMPRA
+        $.MisUrls.urls({ _ObtenerCompras: '@Url.Action("Obtener", "Compra")' });
+        $.MisUrls.urls({ _GuardarCompra: '@Url.Action("Guardar", "Compra")' });
+        $.MisUrls.urls({ _DocumentoCompra: '@Url.Action("Documento", "Compra")' });
+
+        //CONTROLADOR VENTA
+        $.MisUrls.urls({ _ObtenerUsuario: '@Url.Action("ObtenerUsuario", "Venta")' });
+        $.MisUrls.urls({ _ObtenerProductoStockPorTienda: '@Url.Action("ObtenerProductoPorTienda", "Venta")' });
+        $.MisUrls.urls({ _ControlarStockProducto: '@Url.Action("ControlarStock", "Venta")' });
+        $.MisUrls.urls({ _RegistrarVenta: '@Url.Action("Guardar", "Venta")' });
+        $.MisUrls.urls({ _DocumentoVenta: '@Url.Action("Documento", "Venta")' });
+        $.MisUrls.urls({ _ObtenerVentas: '@Url.Action("Obtener", "Venta")' });
+
+        //CONTROLADOR REPORTE
+        $.MisUrls.urls({ _ObtenerReporteProducto :'@Url.Action("ObtenerProducto", "Reporte")' });
+        $.MisUrls.urls({ _ObtenerReporteVenta :'@Url.Action("ObtenerVenta", "Reporte")' });
+
+        //CONTROLADOR CLIENTE
+        $.MisUrls.urls({ _ObtenerClientes: '@Url.Action("Obtener", "Cliente")' });
+        $.MisUrls.urls({ _GuardarCliente: '@Url.Action("Guardar", "Cliente")' });
+        $.MisUrls.urls({ _EliminarCliente: '@Url.Action("Eliminar", "Cliente")' });
+
+        //Lenguaje español datatable
+        $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });
+    </script>
+
+    <script>
+        function activarMenu(menuactivo) {
+            var ul = $("ul.navbar-nav");
+            ul.find("li.nav-item").each(function (i, li) {
+                if ($(li).find("div.dropdown-menu").length != 0) {
+                    var div = $($(li).find("div.dropdown-menu"))
+                    div.find("a.dropdown-item").each(function (x, tagA) {
+                        if ($(tagA).attr("name") == menuactivo) {
+                            $(li).addClass("active");
+                            return false;
+                        }
+                    });
+                } else {
+                    var a = $(li).find("a.nav-link");
+                    if ($(a).attr("name") == menuactivo) {
+                        $(li).addClass("active");
+                        return false;
+                    }
+                }
+            });
+        }
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
